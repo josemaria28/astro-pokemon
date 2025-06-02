@@ -1,0 +1,30 @@
+---
+import NavBar from "@/shared/NavBar.astro";
+
+import "./src/styles/global.css";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Pokemon | {title}</title>
+    </head>
+    <body>
+        <header>
+            <NavBar />
+        </header>
+        <main>
+            <slot />
+        </main>
+        <footer>
+            <div class="text-center py-4">
+                <p class="text-gray-600">© 2023 Pokémon. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>
+</html>

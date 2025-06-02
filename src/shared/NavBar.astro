@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import favicon from "../../public/favicon.svg";
+
+const rutesSite = [
+    { name: "Home", path: "/" },
+    { name: "Pokemons", path: "/pokemons" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Favorites", path: "/favorites" },
+];
+---
+
+<nav class="bg-gray-400">
+    <div class="container mx-auto flex items-center justify-between py-6">
+        <div class="logo">
+            <a href="/" title="Home">
+                <Image
+                    src={favicon}
+                    alt="A description of my image."
+                    width="50"
+                    height="50"
+                />
+            </a>
+        </div>
+        <div class="flex items-center space-x-4">
+
+        {
+            rutesSite.map(({ name, path }) => (
+                <div class="mx-6">
+                    <a href={path} class="text-gray-200 hover:text-blue-500">
+                        {name}
+                    </a>
+                    {Astro.url.pathname === path ? (
+                        <div class="border-b-2 border-blue-500" />
+                    ) : (
+                        <div class="border-b-2 border-transparent" />
+                    )}
+                </div>
+            ))
+        }
+        </div>
+    </div>
+</nav>
