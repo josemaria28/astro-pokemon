@@ -1,44 +1,80 @@
 ---
-import { Image } from "astro:assets";
-import favicon from "../../public/favicon.svg";
-
-const rutesSite = [
+const pages = [
     { name: "Home", path: "/" },
     { name: "Pokemons", path: "/pokemons" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
     { name: "Favorites", path: "/favorites" },
 ];
+const { pathname } = Astro.props;
 ---
 
-<nav class="bg-gray-400">
-    <div class="container mx-auto flex items-center justify-between py-6">
-        <div class="logo">
-            <a href="/" title="Home">
-                <Image
-                    src={favicon}
-                    alt="A description of my image."
-                    width="50"
-                    height="50"
-                />
-            </a>
-        </div>
-        <div class="flex items-center space-x-4">
-
-        {
-            rutesSite.map(({ name, path }) => (
-                <div class="mx-6">
-                    <a href={path} class="text-gray-200 hover:text-blue-500">
-                        {name}
-                    </a>
-                    {Astro.url.pathname === path ? (
-                        <div class="border-b-2 border-blue-500" />
-                    ) : (
-                        <div class="border-b-2 border-transparent" />
-                    )}
-                </div>
-            ))
-        }
+<nav class="bg-gray-400 w-full shadow-xl">
+    <div
+        class="container mx-auto px-4 flex items-center flex-col md:justify-center py-4 gap-2"
+    >
+        <button
+            type="button"
+            class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-6 py-2 rounded shadow transition-colors duration-200 inline-block sm:hidden"
+            id="menu-button"
+        >
+            <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+            >
+                <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M1 1h15M1 7h15M1 13h15"></path>
+            </svg>
+        </button>
+        <div id="menu-links" class="flex-col sm:flex-row sm:flex hidden">
+            {
+                pages.map(({ name, path }) => {
+                    let isActive;
+                    if (path === "/") {
+                        isActive = pathname === "/";
+                    } else {
+                        isActive = pathname.startsWith(path);
+                    }
+                    return (
+                        <div class="mx-6">
+                            <a
+                                href={path}
+                                class="hover:text-yellow-300"
+                                class:list={{
+                                    "text-yellow-300": isActive,
+                                    "text-black": !isActive,
+                                }}
+                                title={name}
+                            >
+                                {name}
+                            </a>
+                        </div>
+                    );
+                })
+            }
         </div>
     </div>
 </nav>
+
+<script>
+    const funcMenu = () => {
+        function handleClickMenu() {
+            const menu = document.querySelector("#menu-links");
+            if (menu) {
+                menu.classList.toggle("hidden");
+            }
+        }
+        const menuButton = document.querySelector("#menu-button");
+        if (menuButton) {
+            menuButton.addEventListener("click", handleClickMenu);
+        }
+    };
+    document.addEventListener("astro:page-load", funcMenu);
+</script>

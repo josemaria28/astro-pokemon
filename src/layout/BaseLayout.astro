@@ -1,9 +1,11 @@
 ---
 import NavBar from "@/shared/NavBar.astro";
 
-import "./src/styles/global.css";
+import "@styles/global.css";
+import { ViewTransitions } from "astro:transitions";
 
 const { title } = Astro.props;
+const { url } = Astro;
 ---
 
 <html lang="en">
@@ -15,8 +17,9 @@ const { title } = Astro.props;
         <title>Pokemon | {title}</title>
     </head>
     <body>
+        <ViewTransitions/>
         <header>
-            <NavBar />
+            <NavBar pathname={url.pathname}/>
         </header>
         <main>
             <slot />

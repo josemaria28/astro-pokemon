@@ -12,7 +12,7 @@
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
       "@shared/*": ["src/shared/*"],
-      
+      "@assets/*": ["src/assets/*"],
     },
     "jsxImportSource": "preact"
 

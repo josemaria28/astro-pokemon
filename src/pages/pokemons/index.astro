@@ -1,11 +1,46 @@
 ---
+import CardPokemones from "@/components/cardPokemones.astro";
 import BaseLayout from "@/layout/BaseLayout.astro";
 
-
+const pokemons = [
+  {
+    name: "bulbasaur",
+    id: 1,
+    image:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+  },
+  {
+    name: "ivysaur",
+    id: 2,
+    image:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+  },
+  {
+    name: "venusaur",
+    id: 3,
+    image:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+  },
+  {
+    name: "charmander",
+    id: 4,
+    image:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+  },
+  {
+    name: "charmeleon",
+    id: 5,
+    image:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+  },
+];
 ---
 
-<BaseLayout title="Pokémon List">
-  <h1>About</h1>
-  <p>This is the about page of the Astro Pokémon app.</p>
-  <p>Here you can find information about the project, its purpose, and how to contribute.</p>
-  </BaseLayout>
+<BaseLayout>
+  <section class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-4">Pokémon de prueba</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {pokemons.map((pokemon) => <CardPokemones {...pokemon} />)}
+    </div>
+  </section>
+</BaseLayout>
