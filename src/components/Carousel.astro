@@ -1,0 +1,83 @@
+---
+const sponsorImages = Object.keys(
+    import.meta.glob("@assets/sponsors/*.png", { eager: true }),
+);
+---
+
+<style>
+    @keyframes slides {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    .carousel {
+        overflow: hidden;
+        padding: 30px 0px;
+        white-space: nowrap;
+        position: relative;
+    }
+
+    .carousel:before,
+    .carousel:after {
+        position: absolute;
+        top: 0;
+        content: "";
+        width: 8em;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .carousel:before {
+        left: 0;
+        background: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0),
+            rgb(255, 255, 255)
+        );
+    }
+
+    .carousel:after {
+        right: 0;
+        background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0),
+            rgb(255, 255, 255)
+        );
+    }
+
+    .ca_items {
+        display: inline-flex;
+        width: max-content;
+        animation: 35s slides infinite linear;
+        gap: 5em;
+        padding-right: 5em;
+    }
+
+    /* .carousel:hover .ca_items {
+        animation-play-state: paused;
+    } */
+
+    .ca_items img {
+        height: 100px;
+        width: auto;
+        max-width: 8em;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+    }
+</style>
+
+<section class="container mx-auto">
+    <div class="carousel after:background-none">
+        <div class="ca_items">
+            {sponsorImages.map((image) => <img src={image} alt="Icon" />)}
+        </div>
+        <div class="ca_items">
+            {sponsorImages.map((image) => <img src={image} alt="Icon" />)}
+        </div>
+    </div>
+</section>

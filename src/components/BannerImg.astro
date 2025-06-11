@@ -1,20 +1,39 @@
 ---
 import { Image } from "astro:assets";
-import imagen from "@assets/pikachu.png";
+import imagen from "@assets/dragon.png";
 ---
 
-<section>
-  <div class="container">
-    <div class="content">
-      <h1>Titulo</h1>
-      <p>Description</p>
+<section
+  class="banner-img mt-10 mb-10 bg-linear-to-t md:from-white md:from-10% md:via-amber-400 md:via-35% md:to-white to-20%"
+>
+  <div
+    class="container mx-auto grid md:grid-cols-2 gap-4 items-center pt-10 pb-10"
+  >
+    <div
+      class="content h-full w-full flex flex-col justify-center items-start gap-5 2xl:w-3/4 2xl:mx-60"
+    >
+      <h1 class="w-full text-4xl text-center">Mundo pokemon</h1>
+      <p>
+        Hola! Soy <span class="text-yellow-400 font-mono border-double"
+          >Dragonite</span
+        >, me gustaria saber cuales son tus <span
+          class="text-cyan-700 font-mono truncate">pokemons favoritos.</span
+        >
+      </p>
+      <a
+        href="/pokemons"
+        class="w-full flex justify-center items-center gap-8 md:w-auto text-center mt-5 bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-6 py-2 rounded shadow transition-colors duration-200"
+        >Ver pokemons <Image
+          src={imagen}
+          alt="Icon"
+          width={30}
+          height={30}
+          class="md:hidden"
+        /></a
+      >
     </div>
-    <Image
-      src={imagen}
-      alt="Pikachu"
-      width={300}
-      height={300}
-      class=""
-    />
+    <div class="hidden md:flex justify-center items-center">
+      <Image src={imagen} alt="Pikachu" width={300} height={300} />
+    </div>
   </div>
 </section>

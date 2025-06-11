@@ -1,0 +1,25 @@
+---
+import { typesPokemon } from "@utils/utils";
+import Title from "./Title.astro";
+---
+
+<section class="mt-20 mb-20">
+    <div class="container mx-auto">
+        <Title title="Categorias de Pokemones" />
+        <div
+            class="grid lg:grid-cols-6 grid-cols-3 gap-4 pt-15 pb-15"
+        >
+            {
+                typesPokemon.map(({ type, color }) => (
+                    <button
+                        type="button"
+                        class="m-2 p-2 text-lg text-white uppercase rounded-lg shadow-xl font-mono"
+                        style={`background-color: ${color};`}
+                    >
+                        {type}
+                    </button>
+                ))
+            }
+        </div>
+    </div>
+</section>

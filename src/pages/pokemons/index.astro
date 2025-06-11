@@ -1,5 +1,6 @@
 ---
 import CardPokemones from "@/components/cardPokemones.astro";
+import Title from "@/components/Title.astro";
 import BaseLayout from "@/layout/BaseLayout.astro";
 
 const pokemons = [
@@ -36,10 +37,10 @@ const pokemons = [
 ];
 ---
 
-<BaseLayout>
-  <section class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-4">Pokémon de prueba</h1>
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<BaseLayout title="Pokemons">
+  <section class="container mx-auto py-8">
+    <Title title="Todos los pokemones" />
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 py-8">
       {pokemons.map((pokemon) => <CardPokemones {...pokemon} />)}
     </div>
   </section>

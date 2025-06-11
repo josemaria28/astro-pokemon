@@ -1,15 +1,10 @@
 ---
-const pages = [
-    { name: "Home", path: "/" },
-    { name: "Pokemons", path: "/pokemons" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
-    { name: "Favorites", path: "/favorites" },
-];
+import { pages } from "@utils/utils.js";
+
 const { pathname } = Astro.props;
 ---
 
-<nav class="bg-gray-400 w-full shadow-xl">
+<nav class="bg-gray-400 w-full shadow-xl relative">
     <div
         class="container mx-auto px-4 flex items-center flex-col md:justify-center py-4 gap-2"
     >
@@ -48,7 +43,7 @@ const { pathname } = Astro.props;
                                 href={path}
                                 class="hover:text-yellow-300"
                                 class:list={{
-                                    "text-yellow-300": isActive,
+                                    "text-yellow-300 font-semibold": isActive,
                                     "text-black": !isActive,
                                 }}
                                 title={name}
