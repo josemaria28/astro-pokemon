@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "@/layout/BaseLayout.astro";
+import type { PokemonsResponse } from "@/interface/pokemon.interface";
+import Title from "@/components/Title.astro";
+import CardPokemones from "@/components/cardPokemones.astro";
+
+
+export const getStaticPaths = (async () => {
+    const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=80");
+    const { results } = (await resp.json()) as PokemonsResponse;
+
+    if (results) {
+        return results.map(({ name, url }) => ({
+            params: { name },
+            props: { url },
+        }));
+    }
+    return [];
+}) satisfies GetStaticPaths;
+
+const { name } = Astro.params;
+const { url } = Astro.props;
+---
+
+<BaseLayout title={name.charAt(0).toUpperCase() + name.slice(1)}>
+    <section class="container mx-auto py-8">
+        <Title title={name.charAt(0).toUpperCase() + name.slice(1)} />
+        <CardPokemones name={name} url={url} isBig/>
+    </section>
+</BaseLayout>

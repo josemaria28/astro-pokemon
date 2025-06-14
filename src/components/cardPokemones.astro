@@ -1,20 +1,64 @@
 ---
+import HeartFull from "../icons/heart-full.svg";
+import HeartNoFull from "../icons/heart-no-full.svg";
+interface Props {
+  name: string;
+  url: string;
+  isBig?: boolean;
+}
 
+const { name, url, isBig = false } = Astro.props;
 
-const { name, image, id } = Astro.props;
+let urlImage = url, type = "";
+if (urlImage) {
+  const resp = await fetch(url);
+  const data = await resp.json();
+  urlImage = data.sprites.other?.["official-artwork"]?.front_default;
+  type = data.types.map((t: { type: { name: string } }) => t.type.name).join(", ");
+}
 ---
 
-<div class="bg-white/20 backdrop-blur-md rounded-xl shadow-md flex flex-col items-center p-4 border border-white/30">
+<div
+  class:list={[
+    "flex flex-col",
+    !isBig ?
+      "items-center bg-white/20 backdrop-blur-md rounded-xl shadow-md p-4 border border-white/30": "mt-8",
+  ]}
+>
+
+{isBig && (<div class="btn-favorites flex justify-end">
+    <HeartNoFull width={50} height={50} class="heart-no-full cursor-pointer" />
+    <HeartFull class="hidden heart-full cursor-pointer" width={50} height={50} />
+    
+    </div>)}
   <img
-    src={image}
+    src={urlImage}
     alt={name}
-    class="w-20 h-20 object-contain mb-2 drop-shadow-md"
+    class:list={["drop-shadow-md",!isBig ? "w-20 h-20 object-contain mb-2 drop-shadow-md" : "w-80 h-80 mx-auto"]}
     loading="lazy"
   />
-  <h2 class="capitalize text-lg font-semibold text-black mb-2 text-center">{name}</h2>
-  <a href={`/pokemons/${id}`} class="mt-2 w-full">
-    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors">
-      Ver Pokémon
-    </button>
-  </a>
+  
+  {
+    !isBig ? (
+      <h2 class="capitalize text-lg font-semibold text-black mb-2 text-center">{name}</h2>
+      <a href={`/pokemons/${name}`} class="mt-2 w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors">
+        Mas detalles
+      </a>
+    ): (
+      <p class="pt-6 text-center font-semibold text-3xl">Tipo: {type}</p>
+    )
+  }
 </div>
+
+
+<script is:inline>
+    const btn = document.querySelector('.btn-favorites');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const heartNoFull = btn.querySelector('.heart-no-full');
+        const heartFull = btn.querySelector('.heart-full');
+        heartNoFull.classList.toggle('hidden');
+        heartFull.classList.toggle('hidden');
+      });
+    }
+  </script>

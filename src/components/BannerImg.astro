@@ -6,9 +6,7 @@ import imagen from "@assets/dragon.png";
 <section
   class="banner-img mt-10 mb-10 bg-linear-to-t md:from-white md:from-10% md:via-amber-400 md:via-35% md:to-white to-20%"
 >
-  <div
-    class="container mx-auto grid md:grid-cols-2 gap-4 items-center"
-  >
+  <div class="container mx-auto grid md:grid-cols-2 gap-4 items-center">
     <div
       class="content h-full w-full flex flex-col justify-center items-start gap-5 2xl:w-3/4 2xl:mx-60"
     >
@@ -21,16 +19,17 @@ import imagen from "@assets/dragon.png";
         >
       </p>
       <a
-        href="/pokemons"
+        href="/pokemons/1"
         class="w-full flex justify-center items-center gap-8 md:w-auto text-center mt-5 bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-6 py-2 rounded shadow transition-colors duration-200"
-        >Ver pokemons <Image
+        >Ver pokemons
+        <Image
           src={imagen}
           alt="Icon"
           width={30}
           height={30}
           class="md:hidden"
-        /></a
-      >
+        />
+      </a>
     </div>
     <div class="hidden md:flex justify-center items-center">
       <Image src={imagen} alt="Pikachu" width={300} height={300} />

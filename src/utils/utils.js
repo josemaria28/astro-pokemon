@@ -1,6 +1,6 @@
 export const pages = [
     { name: "Home", path: "/" },
-    { name: "Pokemons", path: "/pokemons" },
+    { name: "Pokemons", path: "/pokemons/1" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
     { name: "Favorites", path: "/favorites" },
