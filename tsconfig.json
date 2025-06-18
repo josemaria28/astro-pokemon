@@ -36,8 +36,9 @@
       ],
       "@icons/*": [
         "src/icons/*"
-      ],
+      ]
     },
-    "jsxImportSource": "preact",
-  },
+    "jsxImportSource": "solid-js",
+    "jsx": "preserve"
+  }
 }

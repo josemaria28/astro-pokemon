@@ -26,7 +26,7 @@ if (urlImage) {
   ]}
 >
 
-{isBig && (<div class="btn-favorites flex justify-end">
+{isBig && (<div class="btn-favorites flex justify-end" data-name={name}>
     <HeartNoFull width={50} height={50} class="heart-no-full cursor-pointer" />
     <HeartFull class="hidden heart-full cursor-pointer" width={50} height={50} />
     
@@ -51,14 +51,41 @@ if (urlImage) {
 </div>
 
 
-<script is:inline>
-    const btn = document.querySelector('.btn-favorites');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const heartNoFull = btn.querySelector('.heart-no-full');
-        const heartFull = btn.querySelector('.heart-full');
-        heartNoFull.classList.toggle('hidden');
-        heartFull.classList.toggle('hidden');
-      });
+<script>
+
+const handleClick = ()=> {
+  let favoritePokemons: String[] = JSON.parse(localStorage.getItem('favoritePokemons') ?? '[]');
+  
+  const btn = document.querySelector('.btn-favorites') as HTMLElement;
+  if (btn) {
+    const heartNoFull = btn.querySelector('.heart-no-full') as HTMLElement;
+    const heartFull = btn.querySelector('.heart-full') as HTMLElement;
+
+    if (favoritePokemons.some(pokemon => pokemon === btn.dataset.name)) {
+      heartNoFull.classList.add('hidden');
+      heartFull.classList.remove('hidden');
+    } else {
+      heartNoFull.classList.remove('hidden');
+      heartFull.classList.add('hidden');
     }
-  </script>
+
+    btn.addEventListener('click', () => {
+      heartNoFull.classList.toggle('hidden');
+      heartFull.classList.toggle('hidden');
+      
+      const isFavorite = favoritePokemons.some(pokemon => pokemon === btn.dataset.name);
+
+      if (isFavorite) {
+        favoritePokemons = favoritePokemons.filter(pokemon => pokemon !== btn.dataset.name);
+      } else {
+        favoritePokemons.push(btn.dataset.name ?? '');
+      }
+      localStorage.setItem('favoritePokemons', JSON.stringify(favoritePokemons));
+      console.log(favoritePokemons);
+    });
+  }
+
+}
+
+document.addEventListener('astro:page-load', handleClick);
+</script>
