@@ -1,4 +1,5 @@
 ---
+import { Counter } from "@/components/Counter";
 import Title from "@/components/Title.astro";
 import BaseLayout from "@/layout/BaseLayout.astro";
 ---
@@ -9,11 +10,17 @@ import BaseLayout from "@/layout/BaseLayout.astro";
         <div class="py-8">
             <p class="text-gray-700 mb-6">
                 Formulario de contacto para que los usuarios puedan enviar
-                preguntas, comentarios o sugerencias sobre el proyecto.
-                Puedes utilizar un formulario simple con campos para el nombre,
-                correo electrónico y mensaje, o utilizar un servicio de terceros
-                para manejar los envíos de formularios.
+                preguntas, comentarios o sugerencias sobre el proyecto. Puedes
+                utilizar un formulario simple con campos para el nombre, correo
+                electrónico y mensaje, o utilizar un servicio de terceros para
+                manejar los envíos de formularios.
             </p>
         </div>
+        <Counter
+            client:load
+            initValue={10}
+            transition:persist="counter"
+            transition:presist-props
+        />
     </section>
 </BaseLayout>

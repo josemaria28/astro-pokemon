@@ -2,13 +2,22 @@
 import { Counter } from "@/components/Counter";
 import Title from "@/components/Title.astro";
 import BaseLayout from "@/layout/BaseLayout.astro";
+
+const initialCount = 25;
 ---
 
 <BaseLayout title="Favorites">
     <section class="container mx-auto py-8">
-        <Title title="Pokémon Favorites" />
+        <!-- <Title title="Pokémon Favorites" /> -->
         <div class="py-8">
-            <Counter client:load />           
+            <Counter
+                client:load
+                initValue={initialCount}
+                transition:persist="counter"
+                transition:presist-props
+            >
+                <Title title="Pokémon Favorites" />
+            </Counter>
         </div>
     </section>
 </BaseLayout>
